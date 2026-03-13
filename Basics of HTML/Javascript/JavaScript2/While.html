@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>While Loop</title>
+</head>
+
+<body>
+
+    <label>Enter a number: </label>
+    <input type="number" id="number">
+    <button id="btn">Submit</button>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function () {
+            var n = Number(document.getElementById("number").value);
+            var i = 1;
+
+            while (i <= n) {
+                console.log(i);
+                i++;
+            }
+        });
+    </script>
+
+</body>
+</html>

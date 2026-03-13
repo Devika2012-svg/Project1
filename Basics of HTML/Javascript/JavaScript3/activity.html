@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>Simple Number Calculator</h2>
+        <input type="text" id="num" placeholder="Enter a Number">
+        <button onclick="calculate()">Calculate</button>
+        <p id="output"></p>
+
+        <script>
+            function calculate() {
+                try {
+                    let value = document.getElementById("num").value;
+                    let number = Number(value);
+
+                    if (value === "") {
+                        throw "please enter something";
+                    }
+                    
+                    if (isNaN(number)) {
+                        throw "That is not a number";
+                    }
+                    
+                    if (number < 0) {
+                        throw "Number cannot be negetive";
+                    }
+                    
+                    let square = number * number;
+                    let root = Math.sqrt(number);
+
+                    document.getElementById("output").innerHTML = "Square" + square + "<br> Square Root: " + root;
+
+                }
+                catch (error) {
+                    document.getElementById("output").innerHTML = "Error: " + error;
+                }
+            }
+        </script>
+    </body>
+</html>
