@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Aravind!</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- CSS Variables & Basic Setup --- */
+        :root {
+            --pink-dark: #e91e6b;
+            --pink-light: #ff8fa3;
+            --pink-bg: #fff0f5;
+            --text-color: #4a1d2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--pink-bg);
+            background-image: radial-gradient(circle at top right, #ffe4e9, transparent 40%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            /* Prevents scrollbars for confetti */
+        }
+
+        /* --- Main Content Card --- */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 107, 0.15);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--pink-dark);
+            margin-bottom: 0.5rem;
+            animation: popIn 1s ease-out;
+        }
+
+        .age-badge {
+            background: linear-gradient(135deg, var(--pink-dark), var(--pink-light));
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(233, 30, 107, 0.3);
+        }
+
+        .date {
+            color: #8b5a6b;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* --- The Cake (CSS Art) --- */
+        .cake-container {
+            cursor: pointer;
+            margin: 20px auto;
+            width: 100px;
+            transition: transform 0.3s;
+        }
+
+        .cake-container:hover {
+            transform: scale(1.1);
+        }
+
+        .cake {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffb3c1, #ff8fa3);
+            border-radius: 10px 10px 20px 20px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .candle {
+            width: 8px;
+            height: 30px;
+            background: gold;
+            position: absolute;
+            top: -30px;
+            left: 46px;
+            border-radius: 2px;
+        }
+
+        .flame {
+            width: 12px;
+            height: 18px;
+            background: orange;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -18px;
+            left: -2px;
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        .flame.off {
+            opacity: 0;
+        }
+
+        .btn {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Confetti Piece --- */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--pink-light);
+            animation: fall 3s linear forwards;
+            z-index: 1;
+        }
+
+        /* --- Animations --- */
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes flicker {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <!-- Text Info -->
+        <p class="date">March 26</p>
+        <h1>Aravind</h1>
+        <div class="age-badge">Turning 23</div>
+
+        <p class="message">
+            Wishing you a fantastic birthday filled with joy and laughter.
+            Click the cake to make a wish!
+        </p>
+
+        <!-- Interactive Cake -->
+        <div class="cake-container" onclick="blowCandle()">
+            <div class="cake">
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="throwConfetti()">Celebrate!</button>
+    </div>
+
+    <script>
+        // 1. Blow out candle function
+        function blowCandle() {
+            const flame = document.getElementById('flame');
+            // If candle is lit, blow it out
+            if (!flame.classList.contains('off')) {
+                flame.classList.add('off');
+                alert("Happy Birthday! Your wish is granted!");
+            }
+        }
+
+        // 2. Throw Confetti function
+        function throwConfetti() {
+            // Create 50 pieces of confetti
+            for (let i = 0; i < 50; i++) {
+                createConfettiPiece();
+            }
+        }
+
+        function createConfettiPiece() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+
+            // Random horizontal position
+            confetti.style.left = Math.random() * 100 + 'vw';
+            // Random color
+            const colors = ['#ff8fa3', '#e91e6b', '#ffb3c1', '#ffd700'];
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            // Random animation duration
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+            document.body.appendChild(confetti);
+
+            // Remove confetti after animation finishes to keep code clean
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
